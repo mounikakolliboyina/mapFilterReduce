@@ -1,160 +1,690 @@
 // squares of [1, 2, 3] => [1, 4, 9]
-const squaresOf = function (numbers) { };
+const square = function (number) {
+  return number * number;
+};
+
+const squaresOf = function (numbers) {
+  return numbers.map(square);
+};
 
 // lengths of ["apple", "banana", "kiwi"] => [5, 6, 4]
-const lengthsOf = function (strings) { };
+const getLengths = function (element) {
+  return element.length;
+};
+
+const lengthsOf = function (strings) {
+  return strings.map(getLengths);
+};
+
+console.log = lengthsOf(["hi", "hello"]);
+
 
 // uppercase of ["hello", "world"] => ["HELLO", "WORLD"]
-const uppercaseOf = function (strings) { };
+const upperCase = function (string) {
+  return string.toUpperCase();
+};
+
+const uppercaseOf = function (strings) {
+  return strings.map(upperCase);
+};
+
+console.log = uppercaseOf(["hi", "heloo"]);
 
 // first characters of ["apple", "banana", "kiwi"] => ["a", "b", "k"]
-const firstCharactersOf = function (strings) { };
+const firstChar = function (string) {
+  return string[0];
+};
+
+const firstCharactersOf = function (strings) {
+  return strings.map(firstChar);
+};
 
 // truth values of [0, 1, 2, 3] => [false, true, true, true]
 // Assume non-zero numbers are true, and zero is false
-const truthValuesOf = function (numbers) { };
+const isItTruthy = function (number) {
+  return number === 0;
+};
+
+const truthValuesOf = function (numbers) {
+  return numbers.map(isItTruthy);
+};
+
 
 // reverse strings of ["hello", "world"] => ["olleh", "dlrow"]
-const reversedStringsOf = function (strings) { };
+const reverseString = function (string) {
+  return string.split("").reverse().join("");
+};
+
+const reversedStringsOf = function (strings) {
+  return strings.map(reverseString);
+};
 
 // double letters of ["cat", "dog", "bat"] => ["ccaat", "ddoog", "bbaatt"]
-const doubleLettersOf = function (strings) { };
+const doubleChar = function (char) {
+  return char + char;
+};
+
+const doubleLetters = function (string) {
+  return string.split("").map(doubleChar).join("");
+};
+
+const doubleLettersOf = function (strings) {
+  return strings.map(doubleLetters);
+};
 
 // boolean negation of [true, false, true] => [false, true, false]
-const negatedBooleansOf = function (booleans) { };
+const compliment = function (boolean) {
+  return !boolean;
+};
+
+const negatedBooleansOf = function (booleans) {
+  return booleans.map(compliment);
+};
 
 // character codes of ["a", "b", "c"] => [97, 98, 99]
 // Use the `charCodeAt` method on each string
-const charCodesOf = function (strings) { };
+const getCharCode = function (char) {
+  return char.charCodeAt();
+};
+
+const charCodesOf = function (strings) {
+  return strings.map(getCharCode);
+};
 
 // extract domain names from ["user1@gmail.com", "admin@yahoo.com"] => ["gmail.com", "yahoo.com"]
-const domainNamesOf = function (emails) { };
+
+const domainName = function (email) {
+  return email.split("@")[1];
+};
+
+const domainNamesOf = function (emails) {
+  return emails.map(domainName);
+};
+
+
+//-----------------------------------10--------------------------------------
 
 // split words in ["hello world", "goodbye moon"] => [["hello", "world"], ["goodbye", "moon"]]
-const splitWordsOf = function (strings) { };
+
+const splitWords = function (sentence) {
+  return sentence.split(" ");
+};
+
+const splitWordsOf = function (strings) {
+  return strings.map(splitWords);
+};
 
 // join arrays of [["a", "b"], ["c", "d"]] => ["ab", "cd"]
-const joinedArraysOf = function (arrayOfArrays) { };
+
+const joinArray = function (array) {
+  return array.join("");
+};
+
+const joinedArraysOf = function (arrayOfArrays) {
+  return arrayOfArrays.map(joinArray);
+};
 
 // repeat strings in ["hi", "bye"] => ["hihi", "byebye"]
-const repeatedStringsOf = function (strings) { };
+
+const repeatString = function (string) {
+  return string.repeat(2);
+};
+
+const repeatedStringsOf = function (strings) {
+  return strings.map(repeatString);
+};
 
 // count vowels in ["apple", "banana", "grape"] => [2, 3, 2]
-const countVowelsOf = function (strings) { };
+
+const countIfVowel = function (noOfVowels, char) {
+  if ("aeiou".includes(char)) {
+    return noOfVowels + 1;
+  }
+  return noOfVowels;
+};
+
+const countVowels = function (string) {
+  return string.split("").reduce(countIfVowel, 0);
+};
+
+const countVowelsOf = function (strings) {
+  return strings.map(countVowels);
+};
 
 // reverse arrays of [[1, 2, 3], [4, 5, 6]] => [[3, 2, 1], [6, 5, 4]]
-const reversedArraysOf = function (arrays) { };
+
+const reverseArray = function (array) {
+  return array.reverse();
+};
+
+const reversedArraysOf = function (arrays) {
+  return arrays.map(reverseArray);
+};
 
 // remove vowels from ["apple", "banana", "grape"] => ["ppl", "bnn", "grp"]
-const withoutVowelsOf = function (strings) { };
+
+const consonentString = function (consonentStr, char) {
+  if (!"aeiou".includes(char)) {
+    return consonentStr + char;
+  }
+  return consonentStr;
+};
+
+const removeVowels = function (string) {
+  return string.split("").reduce(consonentString, "");
+};
+
+const withoutVowelsOf = function (strings) {
+  return strings.map(removeVowels);
+};
 
 // cumulative sums of [[1, 2, 3], [4, 5, 6]] => [[1, 3, 6], [4, 9, 15]]
 // Example: cumulative sum of [1, 2, 3] is [1, 1+2, 1+2+3]
-const cumulativeSumsOf = function (arrays) { };
+
+const cumulativeSum = function () {
+  let sum = 0;
+
+  return function (element) {
+    sum += element;
+    return sum;
+  };
+};
+
+const cumulativeSumsOf = function (arrays) {
+  return arrays.map(cumulativeSum());
+};
 
 // reverse words in ["hello world", "goodbye moon"] => ["olleh dlrow", "eybdoog noom"]
-const reversedWordsOf = function (strings) { };
 
-// extract unique characters from ["apple", "banana", "grape"] => ["apl", "ban", "gra"]
+const reverseWords = function (words) {
+  return words.split(" ").map(reverseString).join(" ");
+};
+
+const reversedWordsOf = function (strings) {
+  return strings.map(reverseWords);
+};
+
+
+// extract unique characters from ["apple", "banana", "grape"] => ["aple", "ban", "grap"]
 // Maintain the order of their first appearance in each string
-const uniqueCharactersOf = function (strings) { };
+
+const uniqueCharacters = function (uniqueStr, char) {
+  if (!uniqueStr.includes(char)) {
+    return uniqueStr + char;
+  }
+  return uniqueStr;
+};
+
+const removeDuplicateChar = function (string) {
+  return string.split("").reduce(uniqueCharacters, "");
+};
+
+const uniqueCharactersOf = function (strings) {
+  return strings.map(removeDuplicateChar);
+};
 
 // generate ranges from [3, 5, 2] => [[0, 1, 2], [0, 1, 2, 3, 4], [0, 1]]
-const rangesOf = function (numbers) { };
+const rangeOf = function (number) {
+  const array = [];
+  for (let index = start; index < number; index++) {
+    array.push(index);
+  }
+  return array;
+};
+const rangesOf = function (numbers) {
+  return numbers.map(rangeOf);
+};
+
+//---------------------------------------20----------------------------------
 
 // capitalize first letters of ["hello world", "goodbye moon"] => ["Hello World", "Goodbye Moon"]
-const capitalizedFirstLettersOf = function (strings) { };
+
+const firstCharCapital = function (string) {
+  let stringArray = string.split("");
+  stringArray[0] = stringArray[0].toUpperCase();
+
+  return stringArray.join("");
+};
+
+const firstLetterCapitalInSentence = function (sentence) {
+  return sentence.split(" ").map(firstCharCapital).join(" ");
+};
+
+const capitalizedFirstLettersOf = function (strings) {
+  return strings.map(firstLetterCapitalInSentence);
+};
+
 
 // find word lengths in ["apple pie", "banana split"] => [[5, 3], [6, 5]]
-const wordLengthsOf = function (strings) { };
+
+const wordLength = function (word) {
+  return word.length;
+};
+
+const wordLenInSentence = function (sentence) {
+  return sentence.split(" ").map(wordLength);
+};
+
+const wordLengthsOf = function (strings) {
+  return strings.map(wordLenInSentence);
+};
 
 // flatten nested arrays of [[1, [2, 3]], [4, [5, 6]]] => [[1, 2, 3], [4, 5, 6]]
-const flattenedArraysOf = function (arrays) { };
+
+const flatArray = function (nestedArray) {
+  return nestedArray.flat();
+};
+
+const flattenedArraysOf = function (arrays) {
+  return arrays.map(flatArray);
+};
 
 // sort letters in ["cat", "bat", "rat"] alphabetically => ["act", "abt", "art"]
-const sortedLettersOf = function (strings) { };
+
+const sortString = function (string) {
+  return string.split("").toSorted().join("");
+};
+
+const sortedLettersOf = function (strings) {
+  return strings.map(sortString);
+};
 
 // wrap strings in brackets ["apple", "banana"] => ["[apple]", "[banana]"]
-const wrappedStringsOf = function (strings) { };
+
+const wrapString = function (string) {
+  return '[' + string + ']';
+};
+
+const wrappedStringsOf = function (strings) {
+  return strings.map(wrapString);
+};
 
 // extract names from [{ name: "Alice" }, { name: "Bob" }] => ["Alice", "Bob"]
-const extractNames = function (objects) { };
+
+const getNames = function (person) {
+  return person.name;
+};
+
+const extractNames = function (objects) {
+  return objects.map(getNames);
+};
+
+console.log = extractNames([{ name: "Alice" }, { name: "Bob" }]);
 
 // extract ages from [{ age: 25 }, { age: 30 }] => [25, 30]
-const extractAges = function (objects) { };
+
+const getAges = function (person) {
+  return person.age;
+};
+
+const extractAges = function (objects) {
+  return objects.map(getAges);
+};
+
+console.log = extractAges([{ age: 25 }, { age: 30 }]);
 
 // extract the first letters of names from [{ name: "Alice" }, { name: "Bob" }] => ["A", "B"]
-const firstLettersOfNames = function (objects) { };
+
+
+const getFirstLetterInName = function (person) {
+  return person.name[0];
+};
+
+const firstLettersOfNames = function (objects) {
+  return objects.map(getFirstLetterInName);
+};
+
+console.log = firstLettersOfNames([{ name: "Alice" }, { name: "Bob" }]);
 
 // calculate areas from [{ width: 2, height: 3 }, { width: 4, height: 5 }] => [6, 20]
-const calculateAreas = function (rectangles) { };
+
+const area = function (dimensions) {
+  return dimensions.width * dimensions.height;
+};
+
+const calculateAreas = function (rectangles) {
+  return rectangles.map(area);
+};
+
+console.log = calculateAreas([{ width: 2, height: 3 }, { width: 4, height: 5 }]);
 
 // extract boolean flags from [{ active: true }, { active: false }] => [true, false]
-const extractFlags = function (objects) { };
+
+const extractBooleans = function (boolean) {
+  return boolean["active"];
+};
+const extractFlags = function (objects) {
+  return objects.map(extractBooleans);
+};
+
+console.log = extractFlags([{ active: true }, { active: false }]);
+
+// --------------------------------------30------------------------------------
 
 // concatenate first and last names from [{ firstName: "Alice", lastName: "Smith" }, { firstName: "Bob", lastName: "Brown" }] => ["Alice Smith", "Bob Brown"]
-const fullNames = function (objects) { };
+
+const concatenateNames = function (name) {
+  return name["firstName"] + " " + name["lastName"];
+};
+
+const fullNames = function (objects) {
+  return objects.map(concatenateNames);
+};
+
+console.log = fullNames([{ firstName: "Alice", lastName: "Smith" }, { firstName: "Bob", lastName: "Brown" }]);
 
 // calculate total prices from [{ price: 10, quantity: 2 }, { price: 5, quantity: 4 }] => [20, 20]
 // (price * quantity)
-const totalPrices = function (objects) { };
+
+const totalCost = function (product) {
+  return product.price * product.quantity;
+};
+
+const totalPrices = function (objects) {
+  return objects.map(totalCost);
+};
+
+console.log = totalPrices([{ price: 10, quantity: 2 }, { price: 5, quantity: 4 }]);
 
 // determine if a person is an adult from [{ name: "Alice", age: 17 }, { name: "Bob", age: 22 }] => [false, true]
 // (age >= 18)
-const isAdult = function (objects) { };
+
+const isAnAdult = function (person) {
+  return person.age >= 18;
+};
+
+const isAdult = function (objects) {
+  return objects.map(isAnAdult);
+};
+
+console.log = isAdult([{ name: "Alice", age: 17 }, { name: "Bob", age: 22 }]);
 
 // create abbreviations from [{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }] => ["NY, USA", "LA, USA"]
-const abbreviations = function (objects) { };
+
+const createAbbrevations = function (place) {
+  const regex = /[A-Z]/g;
+  const city = place.city.match(regex).join("");
+  const country = place.country.match(regex).join("");
+  return city + ", " + country;
+};
+
+const abbreviations = function (objects) {
+  return objects.map(createAbbrevations);
+};
+
+console.log = abbreviations([{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }]);
 
 // extract scores for math tests from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [90, 80]
-const mathScores = function (objects) { };
+
+const extractMathsMarks = function (personMarks) {
+  return personMarks.scores.math;
+};
+
+const mathScores = function (objects) {
+  return objects.map(extractMathsMarks);
+};
+
+console.log = mathScores([{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }]);
 
 // extract coordinates from [{ x: 1, y: 2 }, { x: 3, y: 4 }] => [[1, 2], [3, 4]]
-const extractCoordinates = function (objects) { };
+
+const getXandY = function (coordinates) {
+  return [coordinates.x, coordinates.y];
+};
+
+const extractCoordinates = function (objects) {
+  return objects.map(getXandY);
+};
+
+console.log = extractCoordinates([{ x: 1, y: 2 }, { x: 3, y: 4 }]);
 
 // extract full name and age from [{ firstName: "Alice", lastName: "Smith", age: 25 }, { firstName: "Bob", lastName: "Brown", age: 30 }] => [["Alice Smith", 25], ["Bob Brown", 30]]
-const fullNameAndAge = function (objects) { };
+
+const extractFullNameAndAge = function (person) {
+  return [person["firstName"] + " " + person["lastName"], person["age"]];
+};
+
+const fullNameAndAge = function (objects) {
+  return objects.map(extractFullNameAndAge);
+};
+
+console.log = fullNameAndAge([{ firstName: "Alice", lastName: "Smith", age: 25 }, { firstName: "Bob", lastName: "Brown", age: 30 }]);
 
 // extract scores from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [[90, 85], [80, 75]]
-const extractScores = function (objects) { };
+
+const getScores = function (person) {
+  return [person.scores.math, person.scores.english];
+};
+
+const extractScores = function (objects) {
+  return objects.map(getScores);
+};
+
+console.log = extractScores([{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }]);
 
 // extract key-value pairs from [{ key: "a", value: 1 }, { key: "b", value: 2 }] => [["a", 1], ["b", 2]]
-const keyValuePairs = function (objects) { };
+
+const extractKeyValuePairs = function (keyValue) {
+  return [keyValue.key, keyValue.value];
+};
+
+const keyValuePairs = function (objects) {
+  return objects.map(extractKeyValuePairs);
+};
+
+console.log = keyValuePairs([{ key: "a", value: 1 }, { key: "b", value: 2 }]);
 
 // split full names into first and last names from [{ name: "Alice Smith" }, { name: "Bob Brown" }] => [["Alice", "Smith"], ["Bob", "Brown"]]
-const splitFullNames = function (objects) { };
+
+const getFirstAndLastName = function (person) {
+  return person.name.split(" ");
+};
+
+const splitFullNames = function (objects) {
+  return objects.map(getFirstAndLastName);
+};
+
+console.log = splitFullNames([{ name: "Alice Smith" }, { name: "Bob Brown" }]);
+
+//------------------------------------40--------------------------------------
 
 // normalize scores so they fall between 0 and 1 based on the max score from [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }] => [0.8, 1]
-const normalizeScores = function (objects) { };
+
+const normalizeScore = function (attributes) {
+  return attributes.score / 100;
+};
+
+const normalizeScores = function (objects) {
+  return objects.map(normalizeScore);
+};
+
+console.log = normalizeScores([{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }]);
 
 // calculate percentage contribution of each number in [10, 20, 30] (relative to the total sum) => [16.67, 33.33, 50]
-const percentageContributions = function (numbers) { };
+
+const totalSum = function (sum, number) {
+  return sum + number;
+};
+
+const percentage = function (sum) {
+  return function (number) {
+    return (number / sum) * 100;
+  };
+};
+
+const percentageContributions = function (numbers) {
+  const sum = numbers.reduce(totalSum, 0);
+
+  return numbers.map(percentage(sum));
+};
+
+console.log = percentageContributions([10, 20, 30]);
 
 // subtract the smallest number from each number in [3, 8, 1] => [2, 7, 0]
-const subtractMin = function (numbers) { };
+
+const smallestNumber = function (smallerNumber, number) {
+  return Math.min(smallerNumber, number);
+};
+
+const subract = function (smallerNumber) {
+  return function (number) {
+    return number - smallerNumber;
+  };
+};
+
+const subtractMin = function (numbers) {
+  const smallerNumber = numbers.reduce(smallestNumber, Infinity);
+
+  return numbers.map(subract(smallerNumber));
+};
+
+console.log = subtractMin([3, 8, 1]);
 
 // calculate ranks (1-based, descending) for scores in [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }] => [2, 1, 3]
-const calculateRanks = function (objects) { };
+
+const getScore = function (person) {
+  return person.score;
+};
+
+const rangeOfRanks = function (number) {
+  const array = [];
+  for (let index = start; index < number; index++) {
+    array.push(index);
+  }
+  return array;
+};
+
+const assignRanks = function (sortedScores, ranks) {
+  const object = {};
+
+  for (let index = 0; index < sortedScores.length; index++) {
+    object[sortedScores[index]] = ranks[index];
+  }
+
+  return object;
+};
+
+const getRank = function (scoresRankObject) {
+  return function (score) {
+    return scoresRankObject[score];
+  };
+};
+
+const calculateRanks = function (objects) {
+  const scores = objects.map(getScore);
+  const sortedScores = scores.toSorted(function (a, b) {
+    return b - a;
+  });
+  const ranks = rangeOfRanks(sortedScores.length);
+  const scoresRankObject = assignRanks(sortedScores, ranks);
+
+  return scores.map(getRank(scoresRankObject));
+};
+
+console.log = calculateRanks([{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }]);
 
 // normalize strings by the longest string length in ["cat", "elephant", "dog"] => ["cat    ", "elephant", "dog    "]
 // (pad with spaces to match the longest length)
-const normalizeStringLengths = function (strings) { };
 
-// normalize strings by centering them based on the longest string length in ["cat", "elephant", "dog"] => ["  cat   ", "elephant", "  dog   "]
+const longestString = function (longestString, string) {
+  if (string.length > longestString.length) {
+    return string;
+  }
+  return longestString;
+};
+
+const padWithSpaces = function (longestStr) {
+  return function (string) {
+    return string.padEnd(longestStr.length, " ");
+
+  };
+};
+
+const normalizeStringLengths = function (strings) {
+  const longestStr = strings.reduce(longestString, "");
+
+  return strings.map(padWithSpaces(longestStr));
+
+};
+
+console.log = normalizeStringLengths(["cat", "elephant", "dog"]);
+
+// normalize strings by centering them based on the longest string length in ["cat", "elephant", "dog"] => ["  cat   ", "elephant", "  dog   ","   ab   "]
 // (pad with spaces to justify to the center)
-const centerJustifyStrings = function (strings) { };
+
+const padWithSpacesInCenter = function (longestStrLength) {
+  return function (string) {
+    const padStartLen = Math.floor((longestStrLength - string.length) / 2);
+
+    return string.padStart(padStartLen + string.length, " ").padEnd(longestStrLength, " ");
+  };
+};
+
+const centerJustifyStrings = function (strings) {
+  const longestStrLength = strings.reduce(longestString, "").length;
+
+  return strings.map(padWithSpacesInCenter(longestStrLength));
+};
+
+console.log = centerJustifyStrings(["cat", "elephant", "dog", "ab"]);
 
 // scale all numbers proportionally so the largest number becomes 100 in [20, 50, 80] => [25, 62.5, 100]
-const scaleToMax100 = function (numbers) { };
+
+const largestNumber = function (smallerNumber, number) {
+  return Math.max(smallerNumber, number);
+};
+
+const scaleTo100 = function (scalingFactor) {
+  return function (number) {
+    return number * scalingFactor;
+  };
+};
+
+const scaleToMax100 = function (numbers) {
+  const scalingFactor = 100 / numbers.reduce(largestNumber, -Infinity);
+  return numbers.map(scaleTo100(scalingFactor));
+};
+
+console.log = scaleToMax100([20, 50, 80]);
 
 // map each number to the difference between it and the average of the array in [10, 20, 30] => [-10, 0, 10]
-const differencesFromMean = function (numbers) { };
+
+const sum = function (sum, number) {
+  return sum + number;
+};
+
+const subractAverage = function (average) {
+  return function (number) {
+    return number - average;
+  };
+};
+const differencesFromMean = function (numbers) {
+  const average = numbers.reduce(sum, 0) / numbers.length;
+
+  return numbers.map(subractAverage(average));
+};
+
+console.log = differencesFromMean([10, 20, 30]);
 
 // map each string to its frequency in ["apple", "banana", "apple", "apple", "banana"] => [3, 2, 3, 3, 2]
-const stringFrequencies = function (strings) { };
 
 // mark the largest number in an array as true, others as false in [1, 3, 2] => [false, true, false]
-const markLargestNumber = function (numbers) { };
+
+const isItLargestNumber = function (largestNum) {
+  return function (number) {
+    return number === largestNum;
+  };
+};
+
+const markLargestNumber = function (numbers) {
+  const largestNum = numbers.reduce(largestNumber, -Infinity);
+
+  return numbers.map(isItLargestNumber(largestNum));
+};
+
+console.log = markLargestNumber([1, 3, 2]);
+
+//----------------------------------------50------------------------------------
 
 // normalize scores based on a curve: first find the max score, then subtract the mean, and scale the results to a range of 0-100 in [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }] => [60, 100, 80]
 // Steps: Find max score, calculate mean, normalize each score.
