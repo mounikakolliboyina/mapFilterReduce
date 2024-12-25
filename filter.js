@@ -425,41 +425,169 @@ console.log = filterByPostCount(
 
 // Apply a discount to each item's price, then filter for items under a certain price [{name: "item1", price: 100}, {name: "item2", price: 50}] => [{name: "item2", price: 45}]
 
-const filterDiscountedItems = function (items, discount, maxPrice) {};
+const filterDiscountedItems = function (items, discount, maxPrice) {
+  const pricesAfterDiscount = items.map((item) => {
+    item["price"] = item.price - discount;
+    return item;
+  });
+
+  return pricesAfterDiscount.filter((item) => item.price < maxPrice);
+};
+
+console.log = filterDiscountedItems(
+  [
+    { name: "item1", price: 100 },
+    { name: "item2", price: 50 },
+  ],
+  5,
+  46
+);
 
 // Convert product names to uppercase, then filter for products with names longer than a certain number [{name: "apple"}, {name: "banana"}] => [{name: "APPLE"}]
-const filterLongProductNames = function (products, minLength) {};
+
+const filterLongProductNames = function (products, minLength) {
+  const namesWithUpperCase = products.map((product) => {
+    product["name"] = product.name.toUpperCase();
+    return product;
+  });
+
+  return namesWithUpperCase.filter(({ name }) => name.length > minLength);
+};
+
+console.log = filterLongProductNames(
+  [{ name: "apple" }, { name: "banana" }],
+  5
+);
 
 // Group users by their age, then filter for specific age groups [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
+
 const filterAgeGroups = function (users, ageGroup) {};
 
 // Convert grades to letter grades, then filter for students who passed [{name: "Alice", grade: 90}, {name: "Bob", grade: 55}] => [{name: "Alice", grade: 90}]
-const filterPassingGrades = function (students, passingGrade) {};
+
+const convertGrades = (grade) => {
+  if (grade > 90 && grade <= 100) {
+    return "A";
+  }
+  if (grade > 80 && grade <= 90) {
+    return "B";
+  }
+  if (grade > 70 && grade <= 80) {
+    return "c";
+  }
+  return "D";
+};
+
+const filterPassingGrades = function (students) {
+  const studentsAfterGrades = students.map((student) => {
+    student.grade = convertGrades(student.grade);
+    return student;
+  });
+
+  return studentsAfterGrades.filter(
+    ({ grade }) => grade === "A" || grade === "B" || grade === "C"
+  );
+};
+
+console.log = filterPassingGrades([
+  { name: "Alice", grade: 90 },
+  { name: "Bob", grade: 55 },
+]);
 
 // Calculate VAT-inclusive prices, then filter for those over a certain threshold [{name: "item1", price: 100}, {name: "item2", price: 50}] => [{name: "item1", price: 120}]
+
 const filterHighPriceWithVAT = function (products, vatRate, threshold) {};
 
 // Calculate the length of each name, then filter for names longer than a given number [{name: "Alice"}, {name: "Bob"}] => [{name: "Alice"}]
-const filterLongNames = function (people, minLength) {};
+
+const filterLongNames = function (people, minLength) {
+  return people.filter(({ name }) => name.length > minLength);
+};
+
+console.log = filterLongNames([{ name: "Alice" }, { name: "Bob" }], 3);
 
 // Normalize scores to a standard range, then filter for students who passed [{name: "John", score: 50}, {name: "Jane", score: 80}] => [{name: "Jane", score: 80}]
-const filterNormalizedScores = function (students, minScore) {};
+
+const normalizeScores = (score, max, min) => {
+  const range = [1, 100];
+
+  return ((score - min) / (max - min)) * range[1] - range[0] + range[0];
+};
+
+const filterNormalizedScores = function (students, minScore) {
+  const scores = students.map(({ score }) => score).sort((a, b) => a - b);
+
+  return students.filter(
+    ({ score }) =>
+      normalizeScores(score, scores[scores.length - 1], scores[0]) > minScore
+  );
+};
+
+console.log = filterNormalizedScores(
+  [
+    { name: "John", score: 50 },
+    { name: "Jane", score: 80 },
+  ],
+  45
+);
 
 // Convert book publication dates, then filter for books published after a given year [{title: "Book1", year: 2020}, {title: "Book2", year: 2022}] => [{title: "Book2", year: 2022}]
+
 const filterRecentBooks = function (books, yearThreshold) {};
 
 // Count the number of posts for each user, then filter for users with more than a specific number of posts [{username: "Alice", posts: 100}, {username: "Bob", posts: 50}] => [{username: "Alice", posts: 100}]
-const filterActivePosters = function (users, postThreshold) {};
+
+const filterActivePosters = function (users, postThreshold) {
+  return users.filter(({ posts }) => posts > postThreshold);
+};
+
+console.log = filterActivePosters(
+  [
+    { username: "Alice", posts: 100 },
+    { username: "Bob", posts: 50 },
+  ],
+  60
+);
 
 // Convert students' grades to letter grades, then filter for students who received a specific grade [{name: "Alice", grade: 90}, {name: "Bob", grade: 85}] => [{name: "Alice", grade: 90}]
-const filterSpecificGrade = function (students, grade) {};
 
+const filterSpecificGrade = function (students, GivenGrade) {
+  const studentsAfterGrades = students.map((student) => {
+    student.grade = convertGrades(student.grade);
+    return student;
+  });
+  return studentsAfterGrades.filter(({ grade }) => grade === GivenGrade);
+};
+
+console.log = filterSpecificGrade(
+  [
+    { name: "Alice", grade: 90 },
+    { name: "Bob", grade: 85 },
+  ],
+  "A"
+);
 //---------------------------40-------------------------------------------
 
 // Filter products based on category and price threshold [{category: {type: "electronics"}, name: "Laptop", price: 800}, {category: {type: "furniture"}, name: "Chair", price: 150}] => [{category: {type: "electronics"}, name: "Laptop", price: 800}]
-const filterByCategoryAndPrice = function (products, category, maxPrice) {};
+
+const filterByCategoryAndPrice = function (products, givenCategory, maxPrice) {
+  const category = products.filter(
+    (product) => product.category.type === givenCategory
+  );
+  return category.filter((product) => product.price > maxPrice);
+};
+
+console.log = filterByCategoryAndPrice(
+  [
+    { category: { type: "electronics" }, name: "Laptop", price: 800 },
+    { category: { type: "furniture" }, name: "Chair", price: 150 },
+  ],
+  "electronics",
+  500
+);
 
 // Filter users based on their activity level and registration date [{profile: {username: "Alice", status: "active"}, registration: {date: "2020-05-01"}}] => [{profile: {username: "Alice", status: "active"}, registration: {date: "2020-05-01"}}]
+
 const filterActiveUsersByDate = function (users, status, dateThreshold) {};
 
 // Filter orders where the customer's balance is above a certain threshold and the order total is under a certain amount [{customer: {name: "Alice", balance: 1000}, order: {total: 200}}] => [{customer: {name: "Alice", balance: 1000}, order: {total: 200}}]
@@ -467,9 +595,23 @@ const filterOrdersByBalanceAndTotal = function (
   orders,
   balanceThreshold,
   totalThreshold
-) {};
+) {
+  const byBalance = orders.filter(
+    (orderDetials) => orderDetials.customer.balance > balanceThreshold
+  );
+
+  return byBalance.filter(
+    (orderDetials) => orderDetials.order.total < totalThreshold
+  );
+};
+console.log = filterOrdersByBalanceAndTotal(
+  [{ customer: { name: "Alice", balance: 1000 }, order: { total: 200 } }],
+  500,
+  300
+);
 
 // Filter articles based on author name and publish date [{author: {name: "Alice"}, content: "Article 1", publishDate: "2021-01-01"}] => [{author: {name: "Alice"}, content: "Article 1", publishDate: "2021-01-01"}]
+
 const filterArticlesByAuthorAndDate = function (
   articles,
   authorName,
@@ -481,34 +623,122 @@ const filterCoursesByInstructorAndRating = function (
   courses,
   instructorName,
   ratingThreshold
-) {};
+) {
+  const byInstructorName = courses.filter(
+    (courseDetails) => courseDetails.instructor.name === instructorName
+  );
+  return byInstructorName.filter(
+    ({ course }) => course.rating > ratingThreshold
+  );
+};
+console.log = filterCoursesByInstructorAndRating(
+  [{ instructor: { name: "John" }, course: { rating: 4.5 } }],
+  "John",
+  4
+);
 
 // Filter projects by team size and completion status [{team: {members: ["Alice", "Bob"], size: 2}, project: {completed: false}}] => [{team: {members: ["Alice", "Bob"], size: 2}, project: {completed: false}}]
+
 const filterProjectsByTeamSizeAndStatus = function (
   projects,
   teamSizeThreshold,
   status
-) {};
+) {
+  const ByTeamSizeThreshold = projects.filter(
+    (projectDetails) => projectDetails.team.size > teamSizeThreshold
+  );
+
+  return ByTeamSizeThreshold.filter(
+    (projectDetails) => projectDetails.project.completed === status
+  );
+};
+
+console.log = filterProjectsByTeamSizeAndStatus(
+  [
+    {
+      team: { members: ["Alice", "Bob"], size: 2 },
+      project: { completed: false },
+    },
+  ],
+  1,
+  false
+);
 
 // Filter job candidates based on years of experience and their skills [{skills: {languages: ["JavaScript", "Python"]}, experience: {years: 5}}] => [{skills: {languages: ["JavaScript", "Python"]}, experience: {years: 5}}]
+
 const filterCandidatesByExperienceAndSkills = function (
   candidates,
   experienceThreshold,
   requiredSkills
-) {};
+) {
+  const ByExperienceThershold = candidates.filter(
+    (candidate) => candidate.experience.years > experienceThreshold
+  );
+
+  return ByExperienceThershold.filter(
+    (candidate) => candidate.skills.languages.join() === requiredSkills.join()
+  );
+};
+
+console.log = filterCandidatesByExperienceAndSkills(
+  [
+    {
+      skills: { languages: ["JavaScript", "Python"] },
+      experience: { years: 5 },
+    },
+  ],
+  4,
+  ["JavaScript", "Python"]
+);
 
 // Filter events based on location and date [{location: {city: "New York"}, date: {eventDate: "2022-07-01"}}] => [{location: {city: "New York"}, date: {eventDate: "2022-07-01"}}]
 const filterEventsByLocationAndDate = function (events, city, dateThreshold) {};
 
-// Filter customers based on region and membership status [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}] => [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}]
+// Filter customers based on region and membership status [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}] =>
+//  [{region: {country: "USA", state: "California"}, membership: {status: "gold"}}]
+
 const filterCustomersByRegionAndStatus = function (
   customers,
-  region,
-  status
-) {};
+  givenRegion,
+  givenStatus
+) {
+  const byRegion = customers.filter(
+    (customer) => customer.region.country === givenRegion
+  );
+  return byRegion.filter(
+    (customer) => customer.membership.status === givenStatus
+  );
+};
+
+console.log = filterCustomersByRegionAndStatus(
+  [
+    {
+      region: { country: "USA", state: "California" },
+      membership: { status: "gold" },
+    },
+  ],
+  "USA",
+  "gold"
+);
 
 // Filter tasks based on assignee's role and priority level [{assignee: {role: "developer"}, task: {priority: "high"}}] => [{assignee: {role: "developer"}, task: {priority: "high"}}]
-const filterTasksByRoleAndPriority = function (tasks, role, priorityLevel) {};
+
+const filterTasksByRoleAndPriority = function (
+  tasks,
+  givenRole,
+  priorityLevel
+) {
+  const ByRole = tasks.filter((roles) => roles.assignee.role === givenRole);
+  return ByRole.filter((person) => person.task.priority === priorityLevel);
+};
+
+console.log = filterTasksByRoleAndPriority(
+  [{ assignee: { role: "developer" }, task: { priority: "high" } }],
+  "developer",
+  "high"
+);
+
+//--------------------------------------50--------------------------------------
 
 // Filter teams where at least one member is from a specific department [{team: {name: "Dev Team", members: [{name: "Alice", department: "Engineering"}, {name: "Bob", department: "Marketing"}]}}] => [{team: {name: "Dev Team", members: [{name: "Alice", department: "Engineering"}, {name: "Bob", department: "Marketing"}]}}]
 const filterTeamsByDepartment = function (teams, department) {};
